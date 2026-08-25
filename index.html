@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Astra</title>
+  <style>
+    body {
+      background: #0d0d14;
+      color: #e8e6f0;
+      font-family: -apple-system, Roboto, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+      padding: 24px;
+    }
+    a {
+      color: #b9a3ff;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <p>Astra uygulamasına yönlendiriliyorsun&hellip;</p>
+    <p>Otomatik açılmazsa <a id="fallback" href="#">buraya dokun</a>.</p>
+  </div>
+  <script>
+    // Supabase, e-posta linkindeki doğrulamayı yaptıktan sonra buraya
+    // #access_token=...&refresh_token=...&type=recovery gibi bir parça
+    // (hash) ekleyerek yönlendiriyor. Biz bunu aynen alıp uygulamanın
+    // kendi özel adresine (astraapp://auth-callback) iletiyoruz — bu son
+    // adımı, sayfa zaten normal bir tarayıcıda açıldığı için, e-posta
+    // uygulamalarının doğrudan engellediği bir yönlendirmeden çok daha
+    // güvenilir şekilde yapabiliyoruz.
+    var target = 'astraapp://auth-callback' + window.location.hash;
+    document.getElementById('fallback').href = target;
+    window.location.replace(target);
+  </script>
+</body>
+</html>
